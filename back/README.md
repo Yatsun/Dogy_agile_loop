@@ -8,7 +8,7 @@
    - Mac/Linux: `python3 -m venv back` 
 4. Switch to virtual environment:
    - Windows: `back\Scripts\activate` 
-   - Mac/Linux: `source back\bin\activate` 
+   - Mac/Linux: `source back/bin/activate` 
 4. Go to `back/` directory. Install the necessary dependencies: `pip install -r requirements.txt`
 5. You're good to go!! Have fun coding :)
 
