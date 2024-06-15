@@ -1,12 +1,18 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
+
+from typing import List, Self
 import os
+
+from ._types import SearchQueryResponse, BusinessResponse, Business
 
 class YelpHandler:
     def __init__(self, api_key):
         self.api_key = api_key
+        self.response: dict = {}
+        self.deserialized_response: SearchQueryResponse = {}
 
-    def call_api(self, location): # Location must be string
+    def call_api(self, location) -> Self: # Location must be string
         # Define the GraphQL endpoint
         url = 'https://api.yelp.com/v3/graphql'
 
@@ -47,5 +53,16 @@ class YelpHandler:
 
         # Create a GraphQL client using the defined transport
         client = Client(transport=transport, fetch_schema_from_transport=True)
-        result = client.execute(query)
-        return result
+        self.response = client.execute(query)
+        return self
+
+    def deserialize_json(self) -> Self:
+        self.deserialized_json = SearchQueryResponse(**self.response)
+        print(self.deserialized_json)
+        return self
+
+    def get_businesses(self) -> List[Business]:
+        return self.deserialized_json.search.business
+
+    def get_total(self) -> int:
+        return self.deserialized_json.search.total
