@@ -10,7 +10,8 @@
    - Windows: `back\Scripts\activate` 
    - Mac/Linux: `source back/bin/activate` 
 4. Go to `back/` directory. Install the necessary dependencies: `pip install -r requirements.txt`
-5. You're good to go!! Have fun coding :)
+5. Rename `.env.template` to `.env` and add your API keys manually.
+6. You're good to go!! Have fun coding :)
 
 ## Development Tips
 1. If you want to update dependencies or add new ones. Use this command
