@@ -21,10 +21,9 @@ class YelpHandler:
         search(
             term: "dog friendly"
             sort_by: "distance"
-            open_now: true
-            categories: "restaurant"
+            categories: "restaurants"
             location: "{location}"
-            limit: 1
+            limit: 20
         ) {{
             business {{
             id
@@ -58,7 +57,7 @@ class YelpHandler:
 
     def deserialize_json(self) -> Self:
         self.deserialized_json = SearchQueryResponse(**self.response)
-        print(self.deserialized_json)
+        print(self.deserialized_json) #TODO: remove this later
         return self
 
     def get_businesses(self) -> List[Business]:
@@ -66,3 +65,6 @@ class YelpHandler:
 
     def get_total(self) -> int:
         return self.deserialized_json.search.total
+
+    def get_json(self) -> SearchQueryResponse:
+        return self.deserialized_json
